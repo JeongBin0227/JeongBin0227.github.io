@@ -1,4 +1,3 @@
-import Calculator from './Calculator.js';
+import App from './components/App.js';
 
-const app = new Calculator();
-app.init();
+new App();
