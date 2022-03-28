@@ -1,9 +1,25 @@
 import CreateAction from './createAction.js';
-import { GET_PRICE, SET_PRICE, TOGGLE_IS_SHOW_NUMBER } from './actions.js';
+import {
+  SET_PRICE,
+  SET_PURCHASED_LOTTO_NUMBERS,
+  SET_PURCHASED_LOTTO_BONUS_NUMBER,
+  SET_WIN_LOTTO_NUMBER,
+  RESTART,
+} from './actions.js';
 
-const getPrice = () => CreateAction(GET_PRICE);
 const setPrice = (price) => CreateAction(SET_PRICE, { price });
-const toggleIsShowNumber = (isShow) =>
-  CreateAction(TOGGLE_IS_SHOW_NUMBER, { isShow });
+const setPurchasedLottoNumbers = (purchasedLottoNumbers) =>
+  CreateAction(SET_PURCHASED_LOTTO_NUMBERS, { purchasedLottoNumbers });
+const setWinLottoNumber = (winLottoNumber) =>
+  CreateAction(SET_WIN_LOTTO_NUMBER, { winLottoNumber });
+const setPurchasedLottoBonusNumber = (bonusNumber) =>
+  CreateAction(SET_PURCHASED_LOTTO_BONUS_NUMBER, { bonusNumber });
+const restart = () => CreateAction(RESTART);
 
-export { getPrice, setPrice, toggleIsShowNumber };
+export {
+  setPrice,
+  setPurchasedLottoNumbers,
+  setPurchasedLottoBonusNumber,
+  setWinLottoNumber,
+  restart,
+};
