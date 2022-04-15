@@ -6,24 +6,28 @@ import store from '../store/store.js';
 function NumberContainer(target) {
   target.innerHTML = template();
 
+  const $racingNumberForm = $('#racing-number-form', target);
   const $racingNumberInput = $('#racing-number', target);
   const $racingNumberBtn = $('#racing-number-btn', target);
 
   render();
   setEvents();
 
-  function setEvents() {
-    $racingNumberBtn.addEventListener('click', () => {
-      const racingNumber = Number($racingNumberInput.value);
-      if (
-        racingNumberValidation.emptyRacingNumber(racingNumber) ||
-        racingNumberValidation.notNumberType(racingNumber) ||
-        racingNumberValidation.minRacingNumber(racingNumber)
-      )
-        return;
+  function setRacingNumberHandler(event) {
+    const racingNumber = $racingNumberInput.valueAsNumber;
+    if (
+      racingNumberValidation.emptyRacingNumber(racingNumber) ||
+      racingNumberValidation.notNumberType(racingNumber) ||
+      racingNumberValidation.minRacingNumber(racingNumber)
+    )
+      return;
 
-      actionMap?.SET_RACING_NUMBER(racingNumber);
-    });
+    actionMap?.SET_RACING_NUMBER(racingNumber);
+    event.preventDefault();
+  }
+
+  function setEvents() {
+    $racingNumberForm.addEventListener('submit', setRacingNumberHandler);
   }
 
   function render() {
@@ -39,10 +43,10 @@ function NumberContainer(target) {
     return `
 	  <fieldset class="num-form">
 	    <p>시도할 횟수를 입력해주세요.</p>
-	      <div class="d-flex">
-		  <input id="racing-number" type="number" class="w-100 mr-2" placeholder="시도 횟수" />
-			<button id="racing-number-btn" type="button" class="btn btn-cyan">확인</button>
-		  </div>
+	    <form id="racing-number-form" class="d-flex">
+		    <input id="racing-number" type="number" class="w-100 mr-2" placeholder="시도 횟수" />
+			  <button id="racing-number-btn" type="submit" class="btn btn-cyan">확인</button>
+		  </form>
 	  </fieldset>
 	`;
   }

@@ -9,22 +9,22 @@ import {
 } from './constants.js';
 
 const hasCarNameOverMaxLength = (cars) =>
-  cars.some((car) => car.length > CAR_NAME_LENGTH_MAXIMUM);
+  cars.some((car) => car.trim().length > CAR_NAME_LENGTH_MAXIMUM);
 
-const validate = (predicate, handleError) => {
-  if (!predicate) {
-    return false;
+const validate = (hasErrorCondition, handleError) => {
+  if (hasErrorCondition) {
+    handleError();
+    return true;
   }
-  handleError();
-  return true;
+  return false;
 };
 
-const predicate = {
-  emptyCarName: (cars) => cars.length === 0,
-  carNameMaxLength: (cars) => hasCarNameOverMaxLength(cars.split(',')),
-  emptyRacingNumber: (number) => number === false,
-  notNumberType: (number) => typeof number !== 'number',
-  minRacingNumber: (number) => number < RACING_MINIMUM_NUMBER,
+const hasErrorCondition = {
+  isEmptyCarName: (cars) => cars.length === 0,
+  isCarNameMaxLength: (cars) => hasCarNameOverMaxLength(cars.split(',')),
+  isEmptyRacingNumber: (number) => number === false,
+  isNotNumberType: (number) => typeof number !== 'number',
+  isMinRacingNumber: (number) => number < RACING_MINIMUM_NUMBER,
 };
 
 const handleError = {
@@ -37,19 +37,28 @@ const handleError = {
 
 export const carNameValidation = {
   emptyCarName: (cars) =>
-    validate(predicate.emptyCarName(cars), handleError.emptyCarName),
+    validate(hasErrorCondition.isEmptyCarName(cars), handleError.emptyCarName),
   carNameMaxLength: (cars) =>
-    validate(predicate.carNameMaxLength(cars), handleError.carNameMaxLength),
+    validate(
+      hasErrorCondition.isCarNameMaxLength(cars),
+      handleError.carNameMaxLength
+    ),
 };
 
 export const racingNumberValidation = {
   emptyRacingNumber: (number) =>
     validate(
-      predicate.emptyRacingNumber(number),
+      hasErrorCondition.isEmptyRacingNumber(number),
       handleError.emptyRacingNumber
     ),
   notNumberType: (number) =>
-    validate(predicate.notNumberType(number), handleError.notNumberType),
+    validate(
+      hasErrorCondition.isNotNumberType(number),
+      handleError.notNumberType
+    ),
   minRacingNumber: (number) =>
-    validate(predicate.minRacingNumber(number), handleError.minRacingNumber),
+    validate(
+      hasErrorCondition.isMinRacingNumber(number),
+      handleError.minRacingNumber
+    ),
 };
