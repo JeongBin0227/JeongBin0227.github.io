@@ -1,22 +1,25 @@
-import { SET_CARS_NAME, SET_RACING_NUMBER } from './actions.js';
+import { ADD_PRODUCT, SET_MENU } from './actions.js';
 
 const initialState = {
-  cars: [],
-  racingNumber: 0,
+  menu: 'productManage',
+  products: [],
 };
 
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case SET_CARS_NAME:
+    case SET_MENU:
       return {
         ...state,
-        cars: payload.cars,
+        menu: payload.menu,
       };
 
-    case SET_RACING_NUMBER:
+    case ADD_PRODUCT:
+      const products = state.products.filter(
+        (product) => product.name !== payload.product.name
+      );
       return {
         ...state,
-        racingNumber: payload.racingNumber,
+        products: [...products, payload.product],
       };
 
     default:

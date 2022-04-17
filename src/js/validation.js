@@ -1,15 +1,13 @@
 import {
-  CAR_NAME_LENGTH_MAXIMUM,
-  INVALID_CAR_MAXIMUM_NAME,
-  INVALID_CAR_NAME,
-  INVALID_RACING_MINIMUM_NUMBER,
-  INVALID_RACING_NUMBER,
-  INVALID_RACING_NUMBER_TYPE,
-  RACING_MINIMUM_NUMBER,
+  EMPTY_PRODUCT_NAME,
+  EMPTY_PRODUCT_NUMBER,
+  EMPTY_PRODUCT_PRICE,
+  INVALID_PRODUCT_NUMBER_MINIMUM,
+  INVALID_PRODUCT_PRICE,
+  INVALID_PRODUCT_PRICE_MINIMUM,
+  PRODUCT_NUMBER_MINIMUM,
+  PRODUCT_PRICE_MINIMUM,
 } from './constants.js';
-
-const hasCarNameOverMaxLength = (cars) =>
-  cars.some((car) => car.trim().length > CAR_NAME_LENGTH_MAXIMUM);
 
 const validate = (hasErrorCondition, handleError) => {
   if (hasErrorCondition) {
@@ -20,45 +18,52 @@ const validate = (hasErrorCondition, handleError) => {
 };
 
 const hasErrorCondition = {
-  isEmptyCarName: (cars) => cars.length === 0,
-  isCarNameMaxLength: (cars) => hasCarNameOverMaxLength(cars.split(',')),
-  isEmptyRacingNumber: (number) => number === false,
-  isNotNumberType: (number) => typeof number !== 'number',
-  isMinRacingNumber: (number) => number < RACING_MINIMUM_NUMBER,
+  isEmptyProductName: (name) => !name.length,
+  isEmptyProductPrice: (price) => !price.length,
+  isEmptyProductNumber: (number) => !number.length,
+  isMinProductPrice: (price) => price < PRODUCT_PRICE_MINIMUM,
+  isInvalidProductPrice: (price) => price % 10 !== 0,
+  isMinProductNumber: (number) => number < PRODUCT_NUMBER_MINIMUM,
 };
 
 const handleError = {
-  emptyCarName: () => alert(INVALID_CAR_NAME),
-  carNameMaxLength: () => alert(INVALID_CAR_MAXIMUM_NAME),
-  emptyRacingNumber: () => alert(INVALID_RACING_NUMBER),
-  notNumberType: () => alert(INVALID_RACING_NUMBER_TYPE),
-  minRacingNumber: () => alert(INVALID_RACING_MINIMUM_NUMBER),
+  emptyProductName: () => alert(EMPTY_PRODUCT_NAME),
+  emptyProductPrice: () => alert(EMPTY_PRODUCT_PRICE),
+  emptyProductNumber: () => alert(EMPTY_PRODUCT_NUMBER),
+  minProductPrice: () => alert(INVALID_PRODUCT_PRICE_MINIMUM),
+  invalidProductPrice: () => alert(INVALID_PRODUCT_PRICE),
+  minProductNumber: () => alert(INVALID_PRODUCT_NUMBER_MINIMUM),
 };
 
-export const carNameValidation = {
-  emptyCarName: (cars) =>
-    validate(hasErrorCondition.isEmptyCarName(cars), handleError.emptyCarName),
-  carNameMaxLength: (cars) =>
+export const productValidation = {
+  emptyProductName: (name) =>
     validate(
-      hasErrorCondition.isCarNameMaxLength(cars),
-      handleError.carNameMaxLength
+      hasErrorCondition.isEmptyProductName(name),
+      handleError.emptyProductName
     ),
-};
-
-export const racingNumberValidation = {
-  emptyRacingNumber: (number) =>
+  emptyProductPrice: (price) =>
     validate(
-      hasErrorCondition.isEmptyRacingNumber(number),
-      handleError.emptyRacingNumber
+      hasErrorCondition.isEmptyProductPrice(price),
+      handleError.emptyProductPrice
     ),
-  notNumberType: (number) =>
+  emptyProductNumber: (number) =>
     validate(
-      hasErrorCondition.isNotNumberType(number),
-      handleError.notNumberType
+      hasErrorCondition.isEmptyProductNumber(number),
+      handleError.emptyProductNumber
     ),
-  minRacingNumber: (number) =>
+  minProductPrice: (price) =>
     validate(
-      hasErrorCondition.isMinRacingNumber(number),
-      handleError.minRacingNumber
+      hasErrorCondition.isMinProductPrice(price),
+      handleError.minProductPrice
+    ),
+  invalidProductPrice: (price) =>
+    validate(
+      hasErrorCondition.isInvalidProductPrice(price),
+      handleError.invalidProductPrice
+    ),
+  minProductNumber: (cars) =>
+    validate(
+      hasErrorCondition.isMinProductNumber(cars),
+      handleError.minProductNumber
     ),
 };

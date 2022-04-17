@@ -1,2 +1,2 @@
-export const SET_CARS_NAME = 'SET_CARS_NAME';
-export const SET_RACING_NUMBER = 'SET_RACING_NUMBER';
+export const SET_MENU = 'SET_MENU';
+export const ADD_PRODUCT = 'ADD_PRODUCT';

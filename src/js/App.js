@@ -1,13 +1,13 @@
-import RacingCar from './RacingCar.js';
-import store from './store/store.js';
 import { $ } from './dom.js';
+import VendingMachine from './VendingMachine.js';
+import store from './store/store.js';
 
 class App {
   constructor() {
     const $app = $('#app');
 
     store.subscribe(() => {
-      new RacingCar($app);
+      new VendingMachine($app);
     });
 
     this.initStore();

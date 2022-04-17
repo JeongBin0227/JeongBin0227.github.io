@@ -1,8 +1,8 @@
+import { ADD_PRODUCT, SET_MENU } from './actions.js';
+
 import CreateAction from './createAction.js';
-import { SET_CARS_NAME, SET_RACING_NUMBER } from './actions.js';
 
-const setCarsName = (cars) => CreateAction(SET_CARS_NAME, { cars });
-const setRacingNumber = (racingNumber) =>
-  CreateAction(SET_RACING_NUMBER, { racingNumber });
+const setMenu = (menu) => CreateAction(SET_MENU, { menu });
+const addProduct = (product) => CreateAction(ADD_PRODUCT, { product });
 
-export { setCarsName, setRacingNumber };
+export { setMenu, addProduct };
