@@ -1,9 +1,5 @@
 {
-  "name": "racingcar",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "devDependencies": {
-    "cypress": "^6.9.1"
+  "dependencies": {
+    "cypress": "^9.5.4"
   }
 }

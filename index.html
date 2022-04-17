@@ -2,20 +2,38 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <title>🏎️ 자동차 경주 게임</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./src/css/index.css" />
+    <title>NEXTSTEP JavaScript Vending machine</title>
   </head>
-  <body>
-    <div id="app">
 
-      <section class="d-flex justify-center mt-5">
-        <div>        
-          <section class="car-name justify-center mt-5"></section>
-          <section class="car-racing-number justify-center mt-5"></section>
-        </div>
-      </section>
-      <section class="result d-flex justify-center mt-5"></section>
-    </div>
+  <body>
+    <h1>🥤 자판기🥤</h1>
+    <button
+      id="product-manage-menu"
+      class="menu-button"
+      data-menu="productManage"
+    >
+      상품 관리
+    </button>
+    <button
+      id="vending-machine-manage-menu"
+      class="menu-button"
+      data-menu="vendingMachineManage"
+    >
+      잔돈충전
+    </button>
+    <button
+      id="product-purchase-menu"
+      class="menu-button"
+      data-menu="productPurchaseManage"
+    >
+      상품 구매
+    </button>
+    <section class="product-manage"></section>
+    <section class="vending-machine-manage"></section>
+    <section class="product-purchase-manage"></section>
     <script type="module" src="./src/js/App.js"></script>
   </body>
 </html>
